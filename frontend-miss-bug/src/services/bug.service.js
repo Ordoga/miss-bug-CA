@@ -44,7 +44,7 @@ async function save(bugToSave) {
     try {
         const queryParams = `?_id=${bugToSave._id || ""}&title=${
             bugToSave.title
-        }&severity=${bugToSave.severity}`
+        }&severity=${bugToSave.severity}&description=${bugToSave.description}`
         const { data: savedBug } = await axios.get(
             BASE_URL + "save" + queryParams
         )
