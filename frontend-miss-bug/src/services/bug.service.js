@@ -1,4 +1,3 @@
-import { utilService } from "./util.service.js"
 import Axios from "axios"
 
 var axios = Axios.create({
@@ -28,8 +27,6 @@ async function getById(bugId) {
     try {
         const { data: bug } = await axios.get(BASE_URL + bugId)
         return bug
-
-        // const bug = bugs.find((bug) => bug._id === bugId)
     } catch (error) {
         throw error
     }
@@ -37,12 +34,7 @@ async function getById(bugId) {
 
 async function remove(bugId) {
     try {
-        // TODO What does it return?
         return await axios.get(BASE_URL + bugId + "/remove")
-
-        // const bugIdx = bugs.findIndex((bug) => bug._id === bugId)
-        // bugs.splice(bugIdx, 1)
-        // _bugCarsToFile()
     } catch (error) {
         throw error
     }
@@ -50,9 +42,9 @@ async function remove(bugId) {
 
 async function save(bugToSave) {
     try {
-        const queryParams = `?_id=${bugToSave._id || ""}&severity=${
-            bugToSave.severity
-        }`
+        const queryParams = `?_id=${bugToSave._id || ""}&title=${
+            bugToSave.title
+        }&severity=${bugToSave.severity}`
         const { data: savedBug } = await axios.get(
             BASE_URL + "save" + queryParams
         )
