@@ -50,10 +50,9 @@ async function remove(bugId) {
 
 async function save(bugToSave) {
     try {
-        // TODO LOGIC is delegated to to backend bug service
-        const queryParams = `?_id=${bugToSave.id || ""}&title=${
-            bugToSave.title
-        }&severity=${bugToSave.severity}`
+        const queryParams = `?_id=${bugToSave._id || ""}&severity=${
+            bugToSave.severity
+        }`
         const { data: savedBug } = await axios.get(
             BASE_URL + "save" + queryParams
         )
