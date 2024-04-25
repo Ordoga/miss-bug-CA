@@ -3,6 +3,7 @@ import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { BugList } from '../cmps/BugList.jsx'
 import { useState } from 'react'
 import { useEffect } from 'react'
+import { Filter } from '../cmps/Filter.jsx'
 
 
 export function BugIndex() {
@@ -66,6 +67,7 @@ export function BugIndex() {
   return (
     <main className="bug-index">
       <h3>Bugs App</h3>
+      <Filter/>
       <main>
         <button className='add-btn' onClick={onAddBug}>Add Bug ⛐</button>
         <BugList bugs={bugs} onRemoveBug={onRemoveBug} onEditBug={onEditBug} />
