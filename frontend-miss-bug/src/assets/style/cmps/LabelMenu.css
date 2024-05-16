@@ -1,0 +1,43 @@
+.label-menu-container {
+    display: grid;
+    /* grid-template-columns: 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px 100px 100px 100px; */
+    max-height: 400px;
+    overflow-y: auto;
+    /* Enable vertical scrolling */
+
+}
+
+.label-menu {
+    border: 4px #41A8BF solid;
+    background-color: #A66B49;
+
+    padding: 8px;
+    border-radius: 16px;
+
+    display: grid;
+    gap: 10px;
+
+    grid-template-columns: repeat(5, 140px);
+    grid-template-rows: repeat(3, 80px);
+    grid-auto-flow: column;
+
+}
+
+.label-tag {
+    border-radius: 12px;
+    margin: 4px;
+    padding: 2px;
+    background-color: #F2B077;
+    border: 1px #B0D1D9 solid;
+    font-size: 1.2rem;
+
+
+    background-color: lightblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 140px;
+
+}

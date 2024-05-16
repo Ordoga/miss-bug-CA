@@ -1,20 +1,25 @@
 import { useEffect, useState } from "react"
+import { bugService } from "../services/bug.service"
 
 
-export function Filter(){
+export function Filter({ filterBy, setFilterBy }) {
 
-    const [filter, setFilter] = useState({text: '', minSeverity: ''})
+    const [filterByToEdit, setfilterByToEdit] = useState(filterBy ? filterBy : bugService.getDefaultFilter())
 
     useEffect(() => {
-        console.log(filter)
-    },[filter])
+        setFilterBy(prevFilter => filterByToEdit)
+    }, [filterByToEdit])
 
-    function handleOnChange(event){
+    function handleOnChange(event) {
         const { name, value } = event.target
-        setFilter(prevFilter => ({...prevFilter, [name] : name === 'minSeverity'? +value : value}))
+        if (name === 'minSeverity' && isNaN(value)) {
+            return
+        }
+
+        setfilterByToEdit(prevFilter => ({ ...prevFilter, [name]: name === 'minSeverity' ? +value : value }))
     }
 
-    function handleOnSubmit(event){
+    function handleOnSubmit(event) {
         event.preventDefault()
     }
 
@@ -22,7 +27,12 @@ export function Filter(){
     return (
         <>
             <form onSubmit={handleOnSubmit}>
-                <input type='text' placeholder='0' name='minSeverity' id='severity' value={filter.minSeverity} onChange={handleOnChange}/>
+                <label htmlFor='minSeverity'>Filter by text:
+                    <input type='text' placeholder='Search Bugs' name='textSearch' id='textSearch' value={filterByToEdit.textSearch} onChange={handleOnChange} />
+                </label>
+                <label htmlFor='minSeverity'>Minimum Severity:
+                    <input type='text' placeholder='0' name='minSeverity' id='severity' value={filterByToEdit.minSeverity} onChange={handleOnChange} />
+                </label>
             </form>
         </>
     )

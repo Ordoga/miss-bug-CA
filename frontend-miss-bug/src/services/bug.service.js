@@ -11,12 +11,14 @@ export const bugService = {
     getById,
     remove,
     save,
+    getDefaultFilter,
+    getDefaultSort,
 }
 
-async function query() {
+async function query(filterBy = getDefaultFilter(), sortBy = getDefaultSort()) {
     try {
-        // Not const to allow modifying the data
-        let { data: bugs } = await axios.get(BASE_URL)
+        const params = {...filterBy, ...sortBy}
+        let { data: bugs } = await axios.get(BASE_URL, {params : params})
         return bugs
     } catch (error) {
         throw error
@@ -34,32 +36,36 @@ async function getById(bugId) {
 
 async function remove(bugId) {
     try {
-        return await axios.get(BASE_URL + bugId + "/remove")
+        return await axios.delete(BASE_URL + bugId)
     } catch (error) {
         throw error
     }
 }
 
+
 async function save(bugToSave) {
     try {
-        const queryParams = `?_id=${bugToSave._id || ""}&title=${
-            bugToSave.title
-        }&severity=${bugToSave.severity}&description=${bugToSave.description}`
-        const { data: savedBug } = await axios.get(
-            BASE_URL + "save" + queryParams
-        )
+        const method = bugToSave._id? "put" : "post"
+        const { data : savedBug } = await axios[method](BASE_URL + (bugToSave._id || ''), bugToSave)
         return savedBug
     } catch (error) {
         throw error
     }
 }
 
-function _bugCarsToFile(path = "../data/bugs.json") {
-    return new Promise((resolve, reject) => {
-        const data = JSON.stringify(bugs, null, 4)
-        fs.writeFile(path, data, err => {
-            if (err) return reject(err)
-            resolve()
-        })
-    })
+function getDefaultFilter(userId = null) {
+    return {
+        textSearch: "",
+        minSeverity: "",
+        labels: [],
+        pageIdx: 0,
+        createdBy: userId
+    }
+}
+
+function getDefaultSort(){
+    return {
+        sortBy: "severity",
+        sortDir: -1
+    }
 }

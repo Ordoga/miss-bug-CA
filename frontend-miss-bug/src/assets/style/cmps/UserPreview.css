@@ -1,0 +1,39 @@
+div {
+    font-size: 1.4rem;
+}
+
+svg {
+    pointer-events: none;
+}
+
+.user-preview {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.user-preview:hover {
+    background-color: antiquewhite
+}
+
+.preview-cell {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 330px;
+}
+
+.list-header {
+    font-weight: 900;
+    height: 50px;
+    background-color: rgb(252, 255, 211);
+}
+
+.list-header:hover {
+    background-color: rgb(252, 255, 211);
+}
+
+.user-password {
+    overflow: hidden;
+}

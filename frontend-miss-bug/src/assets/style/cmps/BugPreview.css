@@ -4,6 +4,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-radius: 14px;
+}
+
+.bug-preview:hover {
+    background-color: rgb(154, 175, 149)
 }
 
 .bug-preview h4 {
@@ -13,4 +18,8 @@
 
 .bug-preview img {
     max-width: 100px;
+}
+
+.btn-bug-details:hover {
+    background-color: rgb(91, 107, 87)
 }
